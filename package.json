@@ -78,7 +78,8 @@
     "dev": "npm run clean && microbundle watch --entry src/index.js --output dist --name goober",
     "sandbox": "wmr --public sandbox/wmr",
     "deploy": "npm run build && npm publish",
-    "format": "prettier \"**/*.{js,ts,tsx,md}\" --write"
+    "format": "prettier \"**/*.{js,ts,tsx,md}\" --write",
+    "pack": "npm run build"
   },
   "keywords": [
     "css-in-js",
