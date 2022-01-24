@@ -2,9 +2,10 @@ import { css } from './css';
 import { parse } from './core/parse';
 
 let h, useTheme, fwdProp;
-function setup(pragma, prefix, theme, forwardProps) {
+function setup(pragma, prefix, theme, forwardProps, selectorPrefix) {
     // This one needs to stay in here, so we won't have cyclic dependencies
     parse.p = prefix;
+    parse.sp = selectorPrefix;
 
     // These are scope to this context
     h = pragma;
@@ -37,6 +38,8 @@ function styled(tag, forwardRef) {
             // similar to goober. This is the append/prepend flag
             // The _empty_ space compresses better than `\s`
             _ctx.o = / *go\d+/.test(_previousClassName);
+
+            _ctx.t = tag;
 
             _props.className =
                 // Define the new className

@@ -2,12 +2,15 @@
  * Parses the object into css, scoped, blocks
  * @param {Object} obj
  * @param {String} selector
- * @param {String} wrapper
+ * @param {String} tag
+ * @param {Boolean} disablePrefix
  */
-export let parse = (obj, selector) => {
+export let parse = (obj, selector, tag, disablePrefix) => {
     let outer = '';
     let blocks = '';
     let current = '';
+
+    const prefixedSelector = !disablePrefix && parse.sp ? parse.sp(selector, tag) : selector;
 
     for (let key in obj) {
         let val = obj[key];
@@ -20,10 +23,11 @@ export let parse = (obj, selector) => {
             } else if (key[1] == 'f') {
                 // Handling the `@font-face` where the
                 // block doesn't need the brackets wrapped
-                blocks += parse(val, key);
+                blocks += parse(val, key, undefined, true);
             } else {
                 // Regular at rule block
-                blocks += key + '{' + parse(val, key[1] == 'k' ? '' : selector) + '}';
+                blocks +=
+                    key + '{' + parse(val, key[1] == 'k' ? '' : selector, undefined, true) + '}';
             }
         } else if (typeof val == 'object') {
             // Call the parse for this block
@@ -41,7 +45,9 @@ export let parse = (obj, selector) => {
                               return sel ? sel + ' ' + k : k;
                           });
                       })
-                    : key
+                    : key,
+                undefined,
+                disablePrefix
             );
         } else if (val != undefined) {
             // If this isn't an empty rule
@@ -56,5 +62,9 @@ export let parse = (obj, selector) => {
     }
 
     // If we have properties apply standard rule composition
-    return outer + (selector && current ? selector + '{' + current + '}' : current) + blocks;
+    return (
+        outer +
+        (prefixedSelector && current ? prefixedSelector + '{' + current + '}' : current) +
+        blocks
+    );
 };

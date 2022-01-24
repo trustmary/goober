@@ -30,9 +30,10 @@ let stringify = (data) => {
  * @param {Object} global Global flag
  * @param {Boolean} append Append or not
  * @param {Boolean} keyframes Keyframes mode. The input is the keyframes body that needs to be wrapped.
+ * @param {tag} tag Tag string from styled. This will be passed to selectorPrefix fn to make selectors more effective.
  * @returns {String}
  */
-export let hash = (compiled, sheet, global, append, keyframes) => {
+export let hash = (compiled, sheet, global, append, keyframes, tag) => {
     // Get a string representation of the object or the value that is called 'compiled'
     let stringifiedCompiled = stringify(compiled);
 
@@ -49,7 +50,8 @@ export let hash = (compiled, sheet, global, append, keyframes) => {
         cache[className] = parse(
             // For keyframes
             keyframes ? { ['@keyframes ' + className]: ast } : ast,
-            global ? '' : '.' + className
+            global ? '' : '.' + className,
+            tag
         );
     }
 

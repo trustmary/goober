@@ -53,7 +53,8 @@ declare namespace goober {
         val: T,
         prefixer?: (key: string, val: any) => string,
         theme?: Function,
-        forwardProps?: ForwardPropsFunction
+        forwardProps?: ForwardPropsFunction,
+        selectorPrefix?: (selector: string, tag: string | undefined) => string
     ): void;
     function extractCss(target?: Element): string;
     function glob(
