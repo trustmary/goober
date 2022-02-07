@@ -1,5 +1,5 @@
 {
-  "name": "@trustmary/goober",
+  "name": "@tmary/goober",
   "version": "2.1.7-prefix.1",
   "description": "A less than 1KB css-in-js solution",
   "sideEffects": false,
@@ -77,7 +77,7 @@
     "build:debug": "npm run build:lib -- --output debug --no-compress",
     "dev": "npm run clean && microbundle watch --entry src/index.js --output dist --name goober",
     "sandbox": "wmr --public sandbox/wmr",
-    "deploy": "npm run build && npm publish",
+    "deploy": "npm run build && npm publish --access public",
     "format": "prettier \"**/*.{js,ts,tsx,md}\" --write",
     "pack": "npm run build"
   },
