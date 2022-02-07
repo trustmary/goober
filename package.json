@@ -1,6 +1,6 @@
 {
-  "name": "goober",
-  "version": "2.1.7",
+  "name": "@trustmary/goober",
+  "version": "2.1.7-prefix.1",
   "description": "A less than 1KB css-in-js solution",
   "sideEffects": false,
   "main": "dist/goober.cjs",
@@ -94,7 +94,7 @@
   "author": "Cristian <botecristian@yahoo.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cristianbote/goober"
+    "url": "git://github.com/trustmary/goober.git"
   },
   "license": "MIT",
   "devDependencies": {
