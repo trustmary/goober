@@ -28,7 +28,10 @@ export let parse = (obj, selector, tag, disablePrefix) => {
                 const dp = key.substring(0, 6) !== '@media';
                 // Regular at rule block
                 blocks +=
-                    key + '{' + parse(val, key[1] == 'k' ? '' : selector, undefined, dp) + '}';
+                    key +
+                    '{' +
+                    parse(val, key[1] == 'k' ? '' : selector, dp ? undefined : tag, dp) +
+                    '}';
             }
         } else if (typeof val == 'object') {
             // Call the parse for this block
